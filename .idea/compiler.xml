@@ -7,18 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="wkwk-video" />
+        <module name="wkwk-user" />
+        <module name="wkwk-interact" />
+        <module name="wkwk-search" />
         <module name="wkwk-model" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
       <module name="azaz-service" target="17" />
+      <module name="demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="azaz-service" options="-parameters" />
       <module name="wkwk-backend" options="" />
+      <module name="wkwk-interact" options="-parameters" />
       <module name="wkwk-model" options="-parameters" />
+      <module name="wkwk-search" options="-parameters" />
+      <module name="wkwk-service" options="" />
+      <module name="wkwk-user" options="-parameters" />
+      <module name="wkwk-video" options="-parameters" />
     </option>
   </component>
 </project>

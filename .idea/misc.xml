@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/wkwk-service/wkwk-interact" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/wkwk-user/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/wkwk-video/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/wkwk-interact/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/wkwk-interaact/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/wkwk-search/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/azaz-service/pom.xml" />
+        <option value="$PROJECT_DIR$/wkwk-service/demo/pom.xml" />
       </set>
     </option>
   </component>
