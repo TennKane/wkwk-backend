@@ -11,10 +11,10 @@
     <description>wkwk-backend</description>
     <modules>
         <module>wkwk-model</module>
-        <module>wkwk-model</module>
         <module>wkwk-service</module>
         <module>wkwk-service/wkwk-gateway</module>
         <module>wkwk-service/feign-api</module>
+        <module>wkwk-common</module>
     </modules>
     <properties>
         <!-- 项目编译JDK版本 -->

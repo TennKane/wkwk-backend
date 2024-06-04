@@ -1,0 +1,13 @@
+azaz:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: 124.221.176.164
+    port: 3306
+    database: azaz
+    username: root
+    password: sgc123456
+  redis:
+    host: 124.221.176.164
+    port: 6380
+    password: sgc123456
+    database: 0
