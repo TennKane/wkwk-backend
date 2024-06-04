@@ -8,19 +8,24 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>wkwk-interact</artifactId>
+    <artifactId>wkwk-gateway</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+        <!--网关-->
         <dependency>
-            <groupId>com.wkwk</groupId>
-            <artifactId>wkwk-model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <!--nacos服务发现依赖-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
+
 </project>
