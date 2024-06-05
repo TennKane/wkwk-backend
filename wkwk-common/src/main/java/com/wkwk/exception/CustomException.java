@@ -11,10 +11,10 @@ import lombok.Getter;
 @Getter
 public class CustomException extends RuntimeException {
 
-    private final AppHttpCodeEnum appHttpCodeEnum;
-
-    public CustomException(AppHttpCodeEnum appHttpCodeEnum){
-        this.appHttpCodeEnum = appHttpCodeEnum;
+    public CustomException() {
     }
 
+    public CustomException(String message) {
+        super(message);
+    }
 }

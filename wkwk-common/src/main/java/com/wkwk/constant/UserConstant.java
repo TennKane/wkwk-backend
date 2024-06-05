@@ -1,7 +1,7 @@
 package com.wkwk.constant;
 
 /**
- * 常量类
+ * 用户信息常量类
  */
 public class UserConstant {
 

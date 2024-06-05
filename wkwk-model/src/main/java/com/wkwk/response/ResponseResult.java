@@ -1,15 +1,12 @@
-package com.wkwk.model;
+package com.wkwk.response;
 
-
-import com.wkwk.enums.AppHttpCodeEnum;
 import lombok.Data;
-import lombok.Getter;
-
 
 import java.io.Serializable;
 
 /**
  * 后端统一返回结果
+ * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @Data
 public class ResponseResult<T> implements Serializable {

@@ -1,6 +1,0 @@
-azaz:
-  redis:
-    host: 124.221.176.164
-    port: 6380
-    password: sgc123456
-    database: 0

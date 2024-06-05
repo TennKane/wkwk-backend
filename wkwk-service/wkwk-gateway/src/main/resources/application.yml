@@ -1,16 +1,15 @@
 spring:
   redis:
-    host: ${azaz.redis.host}
-    port: ${azaz.redis.port}
-    password: ${azaz.redis.password}
-    database: ${azaz.redis.database}
+    host: 124.221.176.164
+    password: sgc123456
+    port: 6380
+    database: 0
   cloud:
     gateway:
       globalcors: # 全局的跨域处理
         corsConfigurations:
           '[/**]':
-            allowedOrigins: # 允许哪些网站的跨域请求
-              - "http://localhost:10010"
+            allowedOriginPatterns: "*" # 允许哪些网站的跨域请求
             allowedMethods: # 允许的跨域ajax的请求方式
               - "GET"
               - "POST"
@@ -19,12 +18,21 @@ spring:
               - "OPTIONS"
             allowedHeaders: "*" # 允许在请求中携带的头信息
             allowCredentials: true # 是否允许携带cookie
-            maxAge: 360000 # 这次跨域检测的有效期
+            maxAge: 3600000 # 这次跨域检测的有效期
+        add-to-simple-url-handler-mapping: true
       routes: # 网关路由配置
         - id: azaz-service-user
           uri: lb://azaz-service-user
-          predicates: # 路由断言，也就是判断请求是否符合路由规则的条件
+          predicates:
             - Path=/azaz/user/**
+        - id: azaz-service-video
+          uri: lb://azaz-service-video
+          predicates:
+            - Path=/azaz/video/**
+        - id: azaz-service-interact
+          uri: lb://azaz-service-interact
+          predicates:
+            - Path=/azaz/interact/**
 logging:
   level:
     com:
