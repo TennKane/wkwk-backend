@@ -1,7 +1,8 @@
 package com.gtkang.wkwkuser.service;
 
 
-import com.wkwk.model.ResponseResult;
+
+import com.wkwk.response.ResponseResult;
 import com.wkwk.user.dto.RegisterDto;
 import com.wkwk.user.dto.UserLoginDto;
 import org.springframework.stereotype.Service;

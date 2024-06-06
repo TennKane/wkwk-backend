@@ -2,9 +2,10 @@ package com.gtkang.wkwkuser.controller;
 
 
 import com.gtkang.wkwkuser.service.UserLoginService;
-import com.wkwk.model.ResponseResult;
+import com.wkwk.response.ResponseResult;
 import com.wkwk.user.dto.RegisterDto;
 import com.wkwk.user.dto.UserLoginDto;
+import com.wkwk.user.vo.UserLoginVo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class UserLoginController {
      * @return 登录结果
      */
     @PostMapping
-    public ResponseResult userLogin(UserLoginDto userLoginDto) {
+    public ResponseResult<UserLoginVo> userLogin(UserLoginDto userLoginDto) {
         return userLoginService.userLogin(userLoginDto);
     }
 }

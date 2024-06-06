@@ -2,8 +2,7 @@ package com.wkwk.exception;
 
 
 import com.wkwk.constant.ResponseConstant;
-import com.wkwk.enums.AppHttpCodeEnum;
-import com.wkwk.model.ResponseResult;
+import com.wkwk.response.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

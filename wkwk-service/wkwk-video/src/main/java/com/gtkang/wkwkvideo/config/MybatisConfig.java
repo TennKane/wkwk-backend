@@ -1,4 +1,4 @@
-package com.gtkang.wkwkuser.config;
+package com.gtkang.wkwkvideo.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Mybatis plus 配置类
+ * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @Configuration
 public class MybatisConfig {

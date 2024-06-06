@@ -1,6 +1,7 @@
 package com.wkwk.interact.vo;
 
-import com.azaz.user.dto.UserPersonInfo;
+
+import com.wkwk.user.dto.UserPersonInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

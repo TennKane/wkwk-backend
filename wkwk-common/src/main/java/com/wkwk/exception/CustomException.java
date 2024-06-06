@@ -2,7 +2,7 @@ package com.wkwk.exception;
 
 
 
-import com.wkwk.enums.AppHttpCodeEnum;
+
 import lombok.Getter;
 
 /**

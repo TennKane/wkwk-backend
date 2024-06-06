@@ -12,8 +12,8 @@
     <modules>
         <module>wkwk-model</module>
         <module>wkwk-service</module>
-        <module>wkwk-service/wkwk-gateway</module>
-        <module>wkwk-service/feign-api</module>
+        <module>wkwk-gateway</module>
+        <module>wkwk-feign-api</module>
         <module>wkwk-common</module>
     </modules>
     <properties>
@@ -28,15 +28,15 @@
         <!-- 依赖包版本管理 -->
         <java.version>17</java.version>
         <!-- SpringCloud 版本管理，定义常用组件版本，后续直接使用无需添加版本号 -->
-        <cloud.version>Hoxton.RELEASE</cloud.version>
+        <cloud.version>2021.0.4</cloud.version>
         <!-- SpringCloudAlibaba 版本管理，定义常用组件版本，后续直接使用无需添加版本号 -->
-        <alibaba.version>2.2.6.RELEASE</alibaba.version>
+        <alibaba.version>2021.0.4.0</alibaba.version>
         <!-- SpringBoot 版本管理，定义常用组件版本，后续直接使用无需添加版本号 -->
-        <springboot.version>2.6.13</springboot.version>
+        <springboot.version>2.6.11</springboot.version>
 
         <!-- 项目依赖版本统一管理 -->
         <gson.version>2.6.2</gson.version>
-        <mysql.version>8.0.30</mysql.version>
+        <mysql.version>8.0.27</mysql.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatisplus.version>3.5.1</mybatisplus.version>
         <logback.version>1.2.3</logback.version>
@@ -45,10 +45,10 @@
         <javacv.version>1.5.7</javacv.version>
         <fastjson2.version>2.0.36</fastjson2.version>
         <guava.version>31.1-jre</guava.version>
-        <io.projectreactor.version>3.6.4</io.projectreactor.version>
+        <io.projectreactor.version>3.3.6.RELEASE</io.projectreactor.version>
         <rocketmq-spring-boot-starter.version>2.2.3</rocketmq-spring-boot-starter.version>
-        <mybatis-spring-boot-starter.version>3.0.2</mybatis-spring-boot-starter.version>
-
+        <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
+        <qiniu.version>[7.13.0, 7.13.99]</qiniu.version>
     </properties>
     <!-- 统一版本管理 -->
     <dependencyManagement>
@@ -97,11 +97,22 @@
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
             <!-- guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <!-- qiniu -->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu.version}</version>
             </dependency>
             <!-- rocketmq -->
             <dependency>
