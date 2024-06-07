@@ -23,5 +23,5 @@ public class InteractConstant {
     /**
      * Redis中保存的最多私信数量
      */
-    public static final Integer REDIS_PRIVATE_MESSAGE_COUNT = 30;
+    public static final Integer REDIS_PRIVATE_MESSAGE_MAX_COUNT = 30;
 }
