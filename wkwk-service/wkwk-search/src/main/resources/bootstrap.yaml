@@ -1,5 +1,5 @@
 server:
-  port:  8084   # 服务端口
+  port: 8084   # 服务端口
 spring:
   application:
     name: azaz-service-search # 服务名称
