@@ -1,8 +1,8 @@
 spring:
   redis:
-    host: 124.221.176.164
-    password: sgc123456
-    port: 6380
+    host: 
+    password: 
+    port: 
     database: 0
   cloud:
     gateway:
@@ -21,22 +21,23 @@ spring:
             maxAge: 3600000 # 这次跨域检测的有效期
         add-to-simple-url-handler-mapping: true
       routes: # 网关路由配置
-        - id: azaz-service-user
-          uri: lb://azaz-service-user
+        - id: wkwk-service-user
+          uri: lb://wkwk-service-user
           predicates:
-            - Path=/azaz/user/**
-        - id: azaz-service-video
-          uri: lb://azaz-service-video
+            - Path=/wkwk/user/**
+        - id: wkwk-service-video
+          uri: lb://wkwk-service-video
           predicates:
-            - Path=/azaz/video/**
-        - id: azaz-service-interact
-          uri: lb://azaz-service-interact
+            - Path=/wkwk/video/**
+        - id: wkwk-service-interact
+          uri: lb://wkwk-service-interact
           predicates:
-            - Path=/azaz/interact/**
+            - Path=/wkwk/interact/**
 logging:
   level:
     com:
-      sky:
-        mapper: debug
-        service: info
-        controller: info
+      gtkang:
+        wkwkgateway:
+          mapper: debug
+          service: info
+          controller: info

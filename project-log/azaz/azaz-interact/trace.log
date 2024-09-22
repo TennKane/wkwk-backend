@@ -1,5 +1,5 @@
-2024-06-07 12:18:30.738 INFO  com.gtkang.wkwkinteract.WkwkInteractApplication   :55   [32m        [0;39m Starting WkwkInteractApplication using Java 17.0.11 on LAPTOP-SJ6P0VIT with PID 12836 (D:\wkwk-backend\wkwk-service\wkwk-interact\target\classes started by 关生 in D:\wkwk-backend)
-2024-06-07 12:18:30.740 INFO  com.gtkang.wkwkinteract.WkwkInteractApplication   :645  [32m        [0;39m No active profile set, falling back to 1 default profile: "default"
+2024-06-07 12:18:30.738 INFO  com.wkwk.WkwkInteractApplication   :55   [32m        [0;39m Starting WkwkInteractApplication using Java 17.0.11 on LAPTOP-SJ6P0VIT with PID 12836 (D:\wkwk-backend\wkwk-service\wkwk-interact\target\classes started by 关生 in D:\wkwk-backend)
+2024-06-07 12:18:30.740 INFO  com.wkwk.WkwkInteractApplication   :645  [32m        [0;39m No active profile set, falling back to 1 default profile: "default"
 2024-06-07 12:18:31.317 INFO  o.s.d.r.config.RepositoryConfigurationDelegate    :262  [32m        [0;39m Multiple Spring Data modules found, entering strict repository configuration mode
 2024-06-07 12:18:31.319 INFO  o.s.d.r.config.RepositoryConfigurationDelegate    :132  [32m        [0;39m Bootstrapping Spring Data Redis repositories in DEFAULT mode.
 2024-06-07 12:18:31.343 INFO  o.s.d.r.config.RepositoryConfigurationDelegate    :201  [32m        [0;39m Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
@@ -11,7 +11,7 @@
 2024-06-07 12:18:32.201 INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] :173  [32m        [0;39m Initializing Spring embedded WebApplicationContext
 2024-06-07 12:18:32.202 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext    :290  [32m        [0;39m Root WebApplicationContext: initialization completed in 1427 ms
 2024-06-07 12:18:33.133 INFO  o.s.cloud.openfeign.FeignClientFactoryBean        :418  [32m        [0;39m For 'azaz-service-user' URL not provided. Will try picking an instance via load-balancing.
-2024-06-07 12:18:33.292 INFO  com.gtkang.wkwkinteract.config.WebMvcConfiguration:28   [32m        [0;39m 开始注册自定义拦截器...
+2024-06-07 12:18:33.292 INFO  config.com.wkwk.WebMvcConfiguration:28   [32m        [0;39m 开始注册自定义拦截器...
 2024-06-07 12:18:34.023 WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger:82   [32m        [0;39m Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
 2024-06-07 12:18:34.105 INFO  com.alibaba.nacos.common.remote.client            :80   [32m        [0;39m [RpcClientFactory] create a new rpc client of 77e6fdfb-01c0-438b-ac73-f26970b52b0a
 2024-06-07 12:18:34.162 INFO  org.reflections.Reflections                       :232  [32m        [0;39m Reflections took 29 ms to scan 1 urls, producing 3 keys and 6 values 
@@ -64,7 +64,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -140,7 +140,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -216,7 +216,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -277,7 +277,7 @@ java.lang.IllegalArgumentException: Param 'serviceName' is illegal, serviceName 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 2024-06-07 12:18:35.010 INFO  org.apache.coyote.http11.Http11NioProtocol        :173  [32m        [0;39m Starting ProtocolHandler ["http-nio-8080"]
 2024-06-07 12:18:35.010 ERROR c.a.nacos.common.remote.client.grpc.GrpcClient    :99   [32m        [0;39m Server check fail, please check server 127.0.0.1 ,port 9848 is available , error ={}
 java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
@@ -477,7 +477,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -554,7 +554,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -631,7 +631,7 @@ java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.Status
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 Caused by: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.io.grpc.Status.asRuntimeException(Status.java:533)
 	at com.alibaba.nacos.shaded.io.grpc.stub.ClientCalls$UnaryStreamToFuture.onClose(ClientCalls.java:490)
@@ -693,7 +693,7 @@ java.lang.IllegalArgumentException: Param 'serviceName' is illegal, serviceName 
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at com.gtkang.wkwkinteract.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
+	at com.wkwk.WkwkInteractApplication.main(WkwkInteractApplication.java:14)
 2024-06-07 12:18:35.360 ERROR c.a.nacos.common.remote.client.grpc.GrpcClient    :99   [32m        [0;39m Server check fail, please check server 127.0.0.1 ,port 9848 is available , error ={}
 java.util.concurrent.ExecutionException: com.alibaba.nacos.shaded.io.grpc.StatusRuntimeException: UNAVAILABLE: io exception
 	at com.alibaba.nacos.shaded.com.google.common.util.concurrent.AbstractFuture.getDoneValue(AbstractFuture.java:566)

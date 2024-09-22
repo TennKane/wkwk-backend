@@ -20,14 +20,10 @@
         <module name="wkwk-search" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="17">
-      <module name="azaz-service" target="17" />
-      <module name="demo" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="azaz-service" options="-parameters" />
       <module name="wkwk-backend" options="" />
       <module name="wkwk-feign-api" options="" />
       <module name="wkwk-gateway" options="" />

@@ -1,7 +1,7 @@
 package com.wkwk.interact.vo;
 
 
-import com.wkwk.user.dto.UserPersonInfo;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,26 +20,22 @@ import java.time.LocalDateTime;
 public class MessageVo {
 
     /**
-    * 发送者
-    */
-    private UserPersonInfo sender;
-    /**
-     * 发送者
+     * 发送者id
      */
-    private UserPersonInfo receiver;
+    private String senderId;
 
     /**
      * 私信id
      */
-    private Long messageId;
+    private String messageId;
 
     /**
-    * 私信内容
-    */
+     * 私信内容
+     */
     private String messageContent;
 
     /**
-    * 发送时间
-    */
-    private LocalDateTime createdTime;
+     * 消息类型 0－私信 1－ 朋友分享 2－系统消息
+     */
+    private Integer status;
 }

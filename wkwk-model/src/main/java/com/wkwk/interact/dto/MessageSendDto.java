@@ -16,4 +16,8 @@ public class MessageSendDto {
      * 私信内容
      */
     private String content;
+    /**
+     * 私信类型0-普通私信 1-视频分享
+     */
+    private Integer status;
 }

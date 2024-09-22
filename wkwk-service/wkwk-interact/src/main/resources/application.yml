@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://124.221.176.164:3306/azaz?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: sgc123456
+    url: jdbc:mysql://localhost:3306/wkwkdb?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username:
+    password:
   redis:
-    host: 124.221.176.164
-    port: 6380
-    password: sgc123456
+    host:
+    port:
+    password:
     database: 0
 # 配置mybatis
 mybatis:
@@ -26,3 +26,6 @@ logging:
         mapper: debug
         service: info
         controller: info
+#配置redisson
+redisson:
+  address: 'redis://'

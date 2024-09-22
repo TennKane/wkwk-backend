@@ -1,9 +1,9 @@
 spring:
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://124.221.176.164:3306/azaz?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://localhost:3306/wkwkdb?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: root
-      password: sgc123456
+      password: 2710
   redis:
     host: 124.221.176.164
     port: 6380
@@ -11,7 +11,7 @@ spring:
     database: 0
 # 配置mybatis
 mybatis:
-  #mapper配置文件
+  #mapper配置文件位置
   mapper-locations: classpath:mapper/*.xml
   configuration:
     #开启驼峰命名

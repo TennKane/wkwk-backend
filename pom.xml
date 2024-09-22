@@ -3,12 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.wkwk</groupId>
     <artifactId>wkwk-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>wkwk-backend</name>
-    <description>wkwk-backend</description>
+
+
     <modules>
         <module>wkwk-model</module>
         <module>wkwk-service</module>
@@ -85,12 +86,12 @@
                 <version>${fastjson2.version}</version>
             </dependency>
             <!-- reactor-test -->
-           <!-- <dependency>
-                <groupId>io.projectreactor</groupId>
-                <artifactId>reactor-test</artifactId>
-                <scope>test</scope>
-                <version>${io.projectreactor.version}</version>
-            </dependency>-->
+            <!-- <dependency>
+                 <groupId>io.projectreactor</groupId>
+                 <artifactId>reactor-test</artifactId>
+                 <scope>test</scope>
+                 <version>${io.projectreactor.version}</version>
+             </dependency>-->
             <!-- gson -->
             <dependency>
                 <groupId>com.solidfire.code.gson</groupId>
@@ -153,6 +154,7 @@
         </dependencies>
     </dependencyManagement>
 
+<!--    像lombok这样的依赖只作用于编译阶段，编译完成就没用了，所以打包时可以从spring-boot的jar包里排除掉-->
     <build>
         <plugins>
             <plugin>

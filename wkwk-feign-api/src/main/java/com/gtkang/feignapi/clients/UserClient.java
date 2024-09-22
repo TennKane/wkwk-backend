@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 用户服务客户端接口
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@FeignClient("azaz-service-user")
+@FeignClient("wkwk-service-user")
 public interface UserClient {
 
     /**
@@ -19,6 +19,6 @@ public interface UserClient {
      * @param userId 用户id
      * @return ResponseResult
      */
-    @GetMapping("/azaz/user/personal")
+    @GetMapping("/wkwk/user/personal")
     ResponseResult<UserPersonalInfoVo> getUserPersonalInfo(@RequestParam("userId") Long userId);
 }

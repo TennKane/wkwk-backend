@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.gtkang</groupId>
+  <groupId>com.wkwk</groupId>
   <artifactId>wkwk-service</artifactId>
   <packaging>pom</packaging>
 

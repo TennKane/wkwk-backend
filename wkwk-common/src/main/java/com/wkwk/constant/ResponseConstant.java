@@ -1,9 +1,11 @@
 package com.wkwk.constant;
 
 /**
+ * 响应信息常量类
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 public class ResponseConstant {
+
     public static final String SUCCESS = "操作成功";
 
     public static final String NEED_LOGIN = "需要登录后操作";
@@ -31,4 +33,5 @@ public class ResponseConstant {
     public static final String USER_NOT_EXIST = "用户不存在";
 
     public static final String NO_OPERATOR_AUTH = "无权限操作";
+
 }
