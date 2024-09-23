@@ -8,9 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@Service
 public interface VideoUploadService {
     ResponseResult publish(VideoPublishDto videoPublishDto);
 
     ResponseResult upload(MultipartFile file);
+
+    ResponseResult getVideos(Integer lastVideoId);
 }
+

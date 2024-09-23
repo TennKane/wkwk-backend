@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("tb_video")
-public class Video {
+public class Video  {
     @TableId(type = IdType.AUTO)
     private Long id;
 
@@ -51,6 +51,16 @@ public class Video {
 
     @TableField("update_time")
     private LocalDateTime updateTime;
+
+    @TableField("likes")
+    private Long likes;
+
+    @TableField("collects")
+    private Long collects;
+
+    @TableField("comments")
+    private Long comments;
+
 
 
 }
