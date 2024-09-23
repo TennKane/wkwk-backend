@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 配置日志存储路径 在当前项目根目录下创建-->
-    <property name="PATH" value="project-log/azaz/azaz-gateway"></property>
+    <property name="PATH" value="project-log/wkwk/wkwk-gateway"></property>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

@@ -27,4 +27,14 @@ public interface InteractClient {
      */
     @GetMapping("/wkwk/interact/fansNum")
     ResponseResult<Integer> getFansNum(@RequestParam("userId") Long userId);
+
+    /**
+     * 判断是否关注
+     * @param firstUser 第一个用户
+     * @param secondUser 第二个用户
+     * @return 是否关注
+     */
+    @GetMapping("/wkwk/interact/follow/ifFollow")
+    ResponseResult<Boolean> ifFollow(@RequestParam("firstUser") Long firstUser,
+                                     @RequestParam("secondUser") Long secondUser);
 }

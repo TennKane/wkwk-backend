@@ -19,7 +19,7 @@ import java.io.ByteArrayInputStream;
 public class QiniuOssUtil {
     static String  accessKey = "dZv53Knxs8XBaPT4jCkyHar7L1u7nJ_LsEM1Fi3T";
     static String secretKey = "8dgc4VO3kFh06GaY_pIlZjJPafJ8GdyOOxCwPXwB";
-    static String bucket = "azaz";
+    static String bucket = "wkwk";
 
     static String CDN="http://s349n62ri.bkt.clouddn.com";
 

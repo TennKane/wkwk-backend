@@ -2,7 +2,7 @@ server:
   port: 8084   # 服务端口
 spring:
   application:
-    name: azaz-service-search # 服务名称
+    name: wkwk-service-search # 服务名称
   profiles:
     active: dev # 服务环境
   cloud:

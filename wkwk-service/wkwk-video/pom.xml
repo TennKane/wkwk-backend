@@ -25,7 +25,7 @@
             <artifactId>wkwk-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--azaz-common模块依赖-->
+        <!--wkwk-common模块依赖-->
         <dependency>
             <groupId>com.wkwk</groupId>
             <artifactId>wkwk-common</artifactId>

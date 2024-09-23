@@ -26,7 +26,7 @@ spring:
     mongodb:
       host: 124.221.176.164
       port: 27017
-      database: azaz
+      database: wkwk
 # 配置mybatis
 mybatis:
   #mapper配置文件

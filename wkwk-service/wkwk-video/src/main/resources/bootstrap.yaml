@@ -2,7 +2,7 @@ server:
   port:  8082   # 服务端口
 spring:
   application:
-    name: azaz-service-video # 服务名称
+    name: wkwk-service-video # 服务名称
   profiles:
     active: dev # 服务环境
   cloud:
