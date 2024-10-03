@@ -42,18 +42,18 @@ public class UserLoginServiceImpl implements UserLoginService{
 
     /**
      * 用户注册
-     * @param userRegisterDto 注册信息
+     * @param registerDto 注册信息
      * @return 注册结果
      */
     @Override
-    public ResponseResult register(UserRegisterDto userRegisterDto) {
-        log.info("用户注册，注册信息：{}", userRegisterDto);
+    public ResponseResult register(UserRegisterDto registerDto) {
+        log.info("用户注册，注册信息：{}", registerDto);
         // 1. 校验参数
-        if (userRegisterDto == null || userRegisterDto.getPhone() == null || userRegisterDto.getPassword() == null) {
+        if (registerDto == null || registerDto.getPhone() == null || registerDto.getPassword() == null) {
             throw new NullParamException("注册信息不能为空！");
         }
-        String phone = userRegisterDto.getPhone();
-        String password = userRegisterDto.getPassword();
+        String phone = registerDto.getPhone();
+        String password = registerDto.getPassword();
         // 1.1 校验手机号是否合法
         if (!Validator.isMatchRegex(UserConstant.PHONE_REGEX, phone)) {
             throw new ErrorParamException("手机号不合法！");
@@ -83,7 +83,7 @@ public class UserLoginServiceImpl implements UserLoginService{
         try {
             userMapper.insert(user);
         } catch (Exception e) {
-            log.error("注册信息插入错误，注册信息：{}", userRegisterDto);
+            log.error("注册信息插入错误，注册信息：{}", registerDto);
             throw new DbOperationException("注册信息插入错误！");
         }
         // 4. 返回注册成功

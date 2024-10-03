@@ -3,6 +3,7 @@ package com.wkwk.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wkwk.clients.InteractClient;
+import com.wkwk.clients.VideoClient;
 import com.wkwk.constant.UserConstant;
 import com.wkwk.mapper.UserMapper;
 import com.wkwk.service.UserInfoService;
@@ -17,6 +18,7 @@ import com.wkwk.user.vo.UserPersonalInfoVo;
 import com.wkwk.utils.QiniuOssUtil;
 import com.wkwk.utils.ThreadLocalUtil;
 import lombok.extern.log4j.Log4j2;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private InteractClient interactClient;
 
+    @Resource
+    private VideoClient videoClient;
+
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
     /**
      * 获取用户个人信息
      * @param userId 用户id
@@ -50,64 +57,62 @@ public class UserInfoServiceImpl implements UserInfoService {
      */
     @Override
     public ResponseResult<UserPersonalInfoVo> getUserPersonalInfo(Long userId) {
-        // 1. 获取到用户的id,如果为空,则说明是查自己，从ThreadLocal中获取
+        //  获取到用户的id,如果为空,则说明是查自己，从ThreadLocal中获取
         if (userId == null){
             userId = ThreadLocalUtil.getUserId();
         }
         log.info("用户个人信息查询: {}", userId);
-        // 1.1 校验用户id是否为空
+        //  校验用户id是否为空
         if (userId == null){
             throw new UserNotLoginException();
         }
-        //2.1从redis获取用户信息
+        // 从 redis 中获取用户信息
         String userInfoRedis = stringRedisTemplate.opsForValue().get(UserConstant.REDIS_USER_INFO + userId);
         if (userInfoRedis != null){
             // redis 中存在用户信息，直接返回
             UserPersonalInfoVo userPersonalInfoVo = JSON.parseObject(userInfoRedis, UserPersonalInfoVo.class);
             return ResponseResult.successResult(userPersonalInfoVo);
         }
-        // 2. 根据用户id查询用户信息, 只需要 用户名、头像、签名
+        //  根据用户id查询用户信息, 只需要 用户名、头像、签名
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("username", "image", "signature").eq("id", userId);
         User user = userMapper.selectOne(queryWrapper);
-        // 2.1 校验用户信息是否为空
+        // 校验用户信息是否为空
         if (user == null){
             throw new UserNotExitedException();
         }
-        // 2.2 拷贝属性
+        // 拷贝属性
         UserPersonalInfoVo userPersonalInfoVo = new UserPersonalInfoVo();
         BeanUtils.copyProperties(user, userPersonalInfoVo);
         userPersonalInfoVo.setId(String.valueOf(userId));
         // 将用户信息存入 redis
         stringRedisTemplate.opsForValue().set(UserConstant.REDIS_USER_INFO + userId, JSON.toJSONString(userPersonalInfoVo),
                 UserConstant.REDIS_USER_INFO_TTL, TimeUnit.SECONDS);
-
-        // 3. 封装返回结果
+        // 封装返回结果
         return ResponseResult.successResult(userPersonalInfoVo);
     }
 
     /**
      * 更新用户个人信息
-     * @param userPersonInfoDto 用户个人信息
+     * @param userPersonInfo 用户个人信息
      * @return ResponseResult
      */
     @Override
-    public ResponseResult updateUserPersonalInfo(UserPersonInfoDto userPersonInfoDto) {
-        log.info("用户个人信息更新: {}", userPersonInfoDto);
+    public ResponseResult updateUserPersonalInfo(UserPersonInfoDto userPersonInfo) {
+        log.info("用户个人信息更新: {}", userPersonInfo);
         // 0. 校验参数
-        if (userPersonInfoDto == null || (userPersonInfoDto.getSignature() == null &&
-                userPersonInfoDto.getImage() == null && userPersonInfoDto.getUsername() == null)){
+        if (userPersonInfo == null || userPersonInfo.getSignature() == null ||
+                userPersonInfo.getImage() == null || userPersonInfo.getUsername() == null){
             throw new ErrorParamException("参数不能为空！");
         }
-        if (userPersonInfoDto.getUsername().length() > 15) {
+        if (userPersonInfo.getUsername().length() > 15) {
             throw new ErrorParamException("用户名不能超过15个字符！");
         }
-        if (userPersonInfoDto.getSignature().length() > 100) {
+        if (userPersonInfo.getSignature().length() > 100) {
             throw new ErrorParamException("签名不能超过100个字符！");
         }
         // 1. 获取到用户的id
         Long userId = ThreadLocalUtil.getUserId();
-
         // 1.1 校验用户id是否为空
         if (userId == null){
             throw new UserNotLoginException();
@@ -116,7 +121,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         //从redis中获取删除信息
         stringRedisTemplate.delete(UserConstant.REDIS_USER_INFO + userId);
         User user = new User();
-        BeanUtils.copyProperties(userPersonInfoDto, user);
+        BeanUtils.copyProperties(userPersonInfo, user);
         user.setId(userId);
         try {
             userMapper.updateById(user);
@@ -124,6 +129,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             log.error("用户信息更新失败: {}", e.getMessage());
             throw new ErrorParamException("用户不存在！");
         }
+        // 3. 发送消息到消息队列,ES索引库中更新用户信息
+        rocketMQTemplate.convertAndSend("user_info", user);
         return ResponseResult.successResult();
     }
 
@@ -178,7 +185,21 @@ public class UserInfoServiceImpl implements UserInfoService {
         Integer followNum = interactClient.getFollowNum(userId).getData();
         // 3. 获取粉丝数
         Integer fansNum = interactClient.getFansNum(userId).getData();
-        // TODO 获取被点赞数以及作品数
-        return null;
+        Integer workNums = videoClient.getUserWorks(userId).getData();
+        Integer likeNums = videoClient.getUserLikes(userId).getData();
+        // 4. 获取是否关注
+        Boolean isFollow = interactClient.ifFollow(ThreadLocalUtil.getUserId(), userId).getData();
+        UserHomePageVo userHomePageVo = UserHomePageVo.builder()
+                .id(userId)
+                .username(userPersonalInfo.getUsername())
+                .image(userPersonalInfo.getImage())
+                .signature(userPersonalInfo.getSignature())
+                .fansNum(fansNum)
+                .followNum(followNum)
+                .workNum(workNums)
+                .likedNum(likeNums)
+                .isFollow(isFollow)
+                .build();
+        return ResponseResult.successResult(userHomePageVo);
     }
 }

@@ -8,7 +8,6 @@ import lombok.Data;
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @Data
-@Builder
 public class VideoInfo {
 
     /**

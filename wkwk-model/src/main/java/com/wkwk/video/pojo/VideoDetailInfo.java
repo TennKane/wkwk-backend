@@ -17,10 +17,10 @@ public class VideoDetailInfo {
     private Long likes;
     private Long collects;
     private Long comments;
-    private boolean islike;
+    private boolean isLiked;
+    private boolean isCollected;
     private String userName;
     private String image;
     private String createTime;
-
 
 }

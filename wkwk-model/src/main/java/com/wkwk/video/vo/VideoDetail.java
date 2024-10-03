@@ -1,15 +1,16 @@
 package com.wkwk.video.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
+ * 视频详细信息
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
 @Data
-@Builder
 public class VideoDetail {
     /**
      * 视频id
@@ -64,7 +65,7 @@ public class VideoDetail {
     /**
      * 作者昵称
      */
-    private String username;
+    private String userName;
 
     /**
      * 作者头像
@@ -74,5 +75,6 @@ public class VideoDetail {
     /**
      * 视频时间
      */
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

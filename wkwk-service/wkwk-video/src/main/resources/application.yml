@@ -27,6 +27,13 @@ spring:
       host: 124.221.176.164
       port: 27017
       database: wkwk
+rocketmq:
+  name-server: 1.14.111.29:9876
+  producer:
+    group: video_group
+    send-message-timeout: 2000
+    retry-times-when-send-failed: 1
+    retry-times-when-send-async-failed: 1
 # 配置mybatis
 mybatis:
   #mapper配置文件

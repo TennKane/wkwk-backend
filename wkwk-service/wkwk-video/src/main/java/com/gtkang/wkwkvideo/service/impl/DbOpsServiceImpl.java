@@ -41,25 +41,31 @@ public class DbOpsServiceImpl implements DbOpsService {
     VideoMapper videoMapper;
 
 
-    @Override
     /**
-     * 向redis中kv键值对的value上加值(加了分布式锁)
-     * @param userId 当前用户id
-     * @param key set的key
-     * @return
+     * 安全的增加一个int类型的值
+     * @param key 视频id
+     * @param num 点赞数
+     * @return 是否成功
      */
+    @Override
     public boolean addIntSafely(String key,int num) {
         //获取分布式锁
-        RLock lock = redissonClient.getLock(key);
+        RLock lock = redissonClient.getLock(key+"xyz");
         try {
             //尝试上锁，5s没加上则抛异常
             if(lock.tryLock(5, TimeUnit.SECONDS)){
+                int exNum;
                 //取出之前的数字
-                Integer exNum = Integer.parseInt(this.stringRedisTemplate.opsForValue().get(key));
-                exNum= exNum==null?0:exNum;
+                String s = this.stringRedisTemplate.opsForValue().get(key);
+                if(s==null){
+                    exNum=0;
+                }
+                else {
+                    exNum=Integer.parseInt(s);
+                }
                 //加上数字存入
-                Integer now=exNum+num;
-                this.stringRedisTemplate.opsForValue().set(key,now.toString());
+                int now=exNum+num;
+                this.stringRedisTemplate.opsForValue().set(key, Integer.toString(now));
                 return true;
             }
             else {
@@ -67,7 +73,7 @@ public class DbOpsServiceImpl implements DbOpsService {
             }
         }
         catch (Exception e){
-            log.error("redisson加锁失败{}",e);
+            log.error("redisson加锁失败: {}",e.getMessage());
             throw new RedissonLockException();
         }
         finally {
@@ -97,18 +103,17 @@ public class DbOpsServiceImpl implements DbOpsService {
             videoLike.setUserId(userId);
         }
         //根据类型对相应字段进行更新操作
-        switch (type){
+        switch (type) {
             //点赞
-            case 1:
-                videoLike.setIsLike((Integer) ops);
-                break;
+            case 1 -> videoLike.setIsLike((Integer) ops);
+
             //收藏
-            case 2:
-                videoLike.setIsCollect((Integer) ops);
-                break;
+            case 2 -> videoLike.setIsCollect((Integer) ops);
+
             //评论
-            case 3:
-                videoLike.setCommentList((ArrayList<String>) ops);
+            case 3 -> videoLike.setCommentList((ArrayList<String>) ops);
+
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
         mongoTemplate.save(videoLike);
     }
@@ -175,8 +180,8 @@ public class DbOpsServiceImpl implements DbOpsService {
 
     /**
      * 要是发现redis中like字段过期，则从数据库中查询数据返回，并同时把此视频所有字段刷新到redis
-     * @param videoId
-     * @return
+     * @param videoId 视频id
+     * @return 点赞数
      */
     @Override
     public Long getSumFromDb(Long videoId){
