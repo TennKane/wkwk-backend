@@ -33,10 +33,10 @@ spring:
           uri: lb://wkwk-service-interact
           predicates:
             - Path=/wkwk/interact/**
-        - id: azaz-service-search
-          uri: lb://azaz-service-search
+        - id: wkwk-service-search
+          uri: lb://wkwk-service-search
           predicates:
-            - Path=/azaz/search/**
+            - Path=/wkwk/search/**
 logging:
   level:
     com:
