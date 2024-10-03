@@ -1,6 +1,6 @@
-package com.gtkang.wkwksearch.config;
+package com.wkwk.config;
 
-import com.gtkang.wkwksearch.interceptor.TokenInterceptor;
+import com.wkwk.interceptor.TokenInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

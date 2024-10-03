@@ -1,7 +1,7 @@
 package com.wkwk.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gtkang.feignapi.clients.UserClient;
+import com.wkwk.clients.UserClient;
 import com.wkwk.constant.InteractConstant;
 import com.wkwk.exception.ErrorOperationException;
 import com.wkwk.exception.ErrorParamException;

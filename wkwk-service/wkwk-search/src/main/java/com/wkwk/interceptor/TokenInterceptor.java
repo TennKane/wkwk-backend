@@ -1,4 +1,4 @@
-package com.gtkang.wkwksearch.interceptor;
+package com.wkwk.interceptor;
 
 import com.wkwk.utils.ThreadLocalUtil;
 import org.springframework.stereotype.Component;

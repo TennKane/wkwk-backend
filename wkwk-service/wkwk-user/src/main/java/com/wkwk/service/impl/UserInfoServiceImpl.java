@@ -2,7 +2,7 @@ package com.wkwk.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.gtkang.feignapi.clients.InteractClient;
+import com.wkwk.clients.InteractClient;
 import com.wkwk.constant.UserConstant;
 import com.wkwk.mapper.UserMapper;
 import com.wkwk.service.UserInfoService;

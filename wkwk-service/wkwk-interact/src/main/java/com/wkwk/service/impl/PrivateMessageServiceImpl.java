@@ -1,7 +1,7 @@
 package com.wkwk.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.gtkang.feignapi.clients.UserClient;
+import com.wkwk.clients.UserClient;
 import com.wkwk.constant.InteractConstant;
 import com.wkwk.exception.ErrorOperationException;
 import com.wkwk.exception.ErrorParamException;

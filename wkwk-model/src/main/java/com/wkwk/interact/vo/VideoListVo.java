@@ -1,5 +1,6 @@
 package com.wkwk.interact.vo;
 
+import com.wkwk.video.vo.VideoDetail;
 import lombok.Builder;
 import lombok.Data;
 

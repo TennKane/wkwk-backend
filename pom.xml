@@ -52,6 +52,7 @@
         <qiniu.version>7.2.7</qiniu.version>
         <redisson.version>3.16.3</redisson.version>
         <elasticsearch.version>7.12.1</elasticsearch.version>
+        <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
     </properties>
     <!-- 统一版本管理 -->
     <dependencyManagement>
@@ -81,25 +82,25 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!-- druid -->
+            <!--             druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!-- fastjson2 -->
+            <!--             fastjson2 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
             </dependency>
-            <!-- reactor-test -->
-             <dependency>
-                 <groupId>io.projectreactor</groupId>
-                 <artifactId>reactor-test</artifactId>
-                 <scope>test</scope>
-                 <version>${io.projectreactor.version}</version>
-             </dependency>
+            <!--             reactor-test -->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-test</artifactId>
+                <scope>test</scope>
+                <version>${io.projectreactor.version}</version>
+            </dependency>
             <!-- gson -->
             <dependency>
                 <groupId>com.solidfire.code.gson</groupId>
@@ -172,7 +173,6 @@
         </dependencies>
     </dependencyManagement>
 
-<!--    像lombok这样的依赖只作用于编译阶段，编译完成就没用了，所以打包时可以从spring-boot的jar包里排除掉-->
     <build>
         <plugins>
             <plugin>

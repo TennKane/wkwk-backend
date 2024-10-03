@@ -1,4 +1,4 @@
-package com.gtkang.feignapi.clients;
+package com.wkwk.clients;
 
 import com.wkwk.response.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
