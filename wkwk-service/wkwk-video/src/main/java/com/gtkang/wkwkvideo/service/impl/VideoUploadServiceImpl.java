@@ -158,7 +158,7 @@ public class VideoUploadServiceImpl implements VideoUploadService {
      * @return 返回response
      */
     @Override
-    public ResponseResult getVideos(Integer lastVideoId) {
+    public ResponseResult getVideos(Integer lastVideoId,Integer section) {
         GetVideoInfo getVideoInfo=new GetVideoInfo();
         List <VideoDetailInfo>videoList=new ArrayList<>();
         if(lastVideoId==0){
@@ -176,6 +176,9 @@ public class VideoUploadServiceImpl implements VideoUploadService {
                 getVideoInfo.setLastVideoId(i);
                 getVideoInfo.setTotal(videoList.size());
                 return ResponseResult.successResult(getVideoInfo);
+            }
+            if(!video.getSection().equals(section) && !section.equals(0)){
+                continue;
             }
             BeanUtils.copyProperties(video,videoDetailInfo);
             //获取时间

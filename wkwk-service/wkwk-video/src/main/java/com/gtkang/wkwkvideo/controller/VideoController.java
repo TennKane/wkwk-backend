@@ -87,7 +87,9 @@ public class VideoController {
      * @return 视频列表
      */
     @GetMapping("/getVideos")
-    public ResponseResult getVideo(Integer lastVideoId){return videoUploadService.getVideos(lastVideoId);}
+    public ResponseResult getVideo(Integer lastVideoId,Integer section){
+        return videoUploadService.getVideos(lastVideoId,section);
+    }
 
     /**
      * 得到用户点赞过的视频列表
