@@ -2,6 +2,7 @@ package com.wkwk.controller;
 
 import com.wkwk.response.ResponseResult;
 import com.wkwk.service.UserInfoService;
+import com.wkwk.user.dto.AckPasswordDto;
 import com.wkwk.user.dto.UserPersonInfoDto;
 import com.wkwk.user.vo.UserHomePageVo;
 import com.wkwk.user.vo.UserPersonalInfoVo;
@@ -59,5 +60,15 @@ public class UserInfoController {
     @GetMapping("/homePage")
     public ResponseResult<UserHomePageVo> getUserHomePage(Long userId){
         return userInfoService.getUserHomePage(userId);
+    }
+
+    /**
+     * 校验密码
+     * @param ackPasswordDto 密码
+     * @return ResponseResult<Boolean> 校验结果
+     */
+    @GetMapping("/ackPassword")
+    public ResponseResult<Boolean> ackPassword(AckPasswordDto ackPasswordDto){
+        return userInfoService.ackPassword(ackPasswordDto);
     }
 }

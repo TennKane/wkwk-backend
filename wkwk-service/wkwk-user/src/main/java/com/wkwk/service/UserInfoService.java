@@ -1,6 +1,7 @@
 package com.wkwk.service;
 
 import com.wkwk.response.ResponseResult;
+import com.wkwk.user.dto.AckPasswordDto;
 import com.wkwk.user.dto.UserPersonInfoDto;
 import com.wkwk.user.vo.UserHomePageVo;
 import com.wkwk.user.vo.UserPersonalInfoVo;
@@ -40,4 +41,11 @@ public interface UserInfoService {
      * @return ResponseResult<UserHomePageVo> 用户主页信息
      */
     ResponseResult<UserHomePageVo> getUserHomePage(Long userId);
+
+    /**
+     * 用户密码确认
+     * @param ackPasswordDto 用户密码传输对象
+     * @return ResponseResult<Boolean> 确认结果
+     */
+    ResponseResult<Boolean> ackPassword(AckPasswordDto ackPasswordDto);
 }
