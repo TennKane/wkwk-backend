@@ -2,6 +2,7 @@ package com.gtkang.wkwkvideo.service;
 
 import com.wkwk.response.ResponseResult;
 import com.wkwk.video.pojo.Video;
+import com.wkwk.video.pojo.VideoList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,19 +54,17 @@ public interface VideoDoLikeService {
     ResponseResult<Integer> getUserWorks(Long userId);
 
     /**
-     * 得到用户发布的视频
-     * @param currentPage 当前页
      * @param userId 用户id
      * @return 收藏数
      */
-    ResponseResult<List<Video>> getPublishedVideos(Integer currentPage, Integer userId);
+    ResponseResult<VideoList> getPublishedVideos(Integer currentPage, Integer userId);
 
     /**
      * 得到用户收藏数
      * @param currentPage 当前页
      * @return 收藏数
      */
-    ResponseResult showCollectsList(Integer currentPage);
+    ResponseResult showCollectsList(Integer currentPage,Integer userId);
 
     /**
      * 得到视频列表

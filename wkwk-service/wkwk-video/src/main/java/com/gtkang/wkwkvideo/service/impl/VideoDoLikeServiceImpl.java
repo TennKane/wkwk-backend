@@ -128,11 +128,11 @@ public class VideoDoLikeServiceImpl implements VideoDoLikeService {
                 this.stringRedisTemplate.opsForSet().add(setKey, String.valueOf(userId));
                 this.stringRedisTemplate.opsForList().leftPush(nowUserKey,String.valueOf(videoId));
                 //异步添加到mongodb
-                dbOpsService.insertIntoMongo(userId,videoId, VideoConstant.COLLECT_TYPE,1);
+                dbOpsService.insertIntoMongo(userId,videoId, VideoConstant.LIKE_TYPE,1);
                 //redis数据加一
                 dbOpsService.addIntSafely(strKey,1);
                 dbOpsService.addIntSafely(userKey,1);
-                return ResponseResult.successResult();
+                return ResponseResult.successResult("收藏成功");
             }
             else {
                 return ResponseResult.errorResult("收藏失败");
@@ -140,20 +140,20 @@ public class VideoDoLikeServiceImpl implements VideoDoLikeService {
         }
         //取消收藏
         else {
-            //判断是否收藏
+            //判断是否点过赞
             if(Boolean.TRUE.equals(this.stringRedisTemplate.opsForSet().isMember(setKey, String.valueOf(userId)))){
-                //取消收藏
+                //取消点赞
                 this.stringRedisTemplate.opsForSet().remove(setKey, userId.toString());
-                this.stringRedisTemplate.opsForSet().remove(nowUserKey,String.valueOf(videoId));
+                this.stringRedisTemplate.opsForList().remove(nowUserKey,1,String.valueOf(videoId));
                 //异步更新到mongodb
-                dbOpsService.insertIntoMongo(userId,videoId,VideoConstant.COLLECT_TYPE,0);
+                dbOpsService.insertIntoMongo(userId,videoId,VideoConstant.LIKE_TYPE,0);
                 //redis数据减一
                 dbOpsService.addIntSafely(strKey,-1);
                 dbOpsService.addIntSafely(userKey,-1);
                 return ResponseResult.successResult();
             }
             else {
-                return ResponseResult.errorResult("取消收藏失败");
+                return ResponseResult.errorResult("重复取消");
             }
         }
     }
@@ -243,13 +243,13 @@ public class VideoDoLikeServiceImpl implements VideoDoLikeService {
      * @return 收藏数
      */
     @Override
-    public ResponseResult<List<Video>> getPublishedVideos(Integer currentPage,Integer userId){
+    public ResponseResult<VideoList> getPublishedVideos(Integer currentPage,Integer userId){
         //得到对应key
         String key=VideoConstant.USER_VIDEO_LIST+userId.toString();
         //得到用户发布的当前页数的videoId
         List<String> videoIds = stringRedisTemplate.opsForList().range(key, (currentPage-1)* 10L,currentPage*10);
         if(videoIds==null){
-            return ResponseResult.successResult(new ArrayList<>());
+            return ResponseResult.successResult(new VideoList());
         }
         List<Video>videos=new ArrayList<>();
         //得到videoId对应的实体类
@@ -263,7 +263,7 @@ public class VideoDoLikeServiceImpl implements VideoDoLikeService {
         videoList.setVideoList(videos);
         //得到视频总数
         videoList.setTotal(Objects.requireNonNull(stringRedisTemplate.opsForList().size(key)).intValue());
-        return ResponseResult.successResult(videos);
+        return ResponseResult.successResult(videoList);
     }
 
     /**
@@ -272,8 +272,7 @@ public class VideoDoLikeServiceImpl implements VideoDoLikeService {
      * @return 收藏数
      */
     @Override
-    public ResponseResult showCollectsList(Integer currentPage){
-        Long userId = ThreadLocalUtil.getUserId();
+    public ResponseResult showCollectsList(Integer currentPage,Integer userId){
         String key=VideoConstant.USER_LIST_COLLECT_KEY+userId.toString();
         //得到用户发布的当前页数的videoId
         List<String> videoIds = stringRedisTemplate.opsForList().range(key, (currentPage-1)* 10L,currentPage*10);

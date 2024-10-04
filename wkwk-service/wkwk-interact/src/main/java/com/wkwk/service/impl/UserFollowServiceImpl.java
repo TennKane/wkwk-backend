@@ -124,7 +124,7 @@ public class UserFollowServiceImpl implements com.wkwk.service.UserFollowService
     }
 
     /**
-     * 判断是否互相关注
+     * 判断第一个用户是否关注了第二个用户
      * @param firstUser 第一个用户
      * @param secondUser 第二个用户
      * @return 是否关注
@@ -135,7 +135,7 @@ public class UserFollowServiceImpl implements com.wkwk.service.UserFollowService
         if (firstUser == null || secondUser == null) {
             throw new NullParamException();
         }
-        // 2.判断是否互相关注
+        // 2.判断第一个用户是否关注了第二个用户
         Boolean isFollow = stringRedisTemplate.opsForSet().isMember(InteractConstant.REDIS_FOLLOW_KEY + firstUser, secondUser.toString());
         if (Boolean.TRUE.equals(isFollow)) {
             return ResponseResult.successResult(Boolean.TRUE);
@@ -227,5 +227,25 @@ public class UserFollowServiceImpl implements com.wkwk.service.UserFollowService
         // 获取粉丝数
         String fansNum = stringRedisTemplate.opsForValue().get(InteractConstant.REDIS_FANS_NUM_KEY + userId);
         return ResponseResult.successResult(fansNum == null ?  0 : Integer.parseInt(fansNum));
+    }
+
+    /**
+     * 判断是否互相关注
+     * @param firstUser 第一个用户
+     * @param secondUser 第二个用户
+     * @return 是否互相关注
+     */
+    @Override
+    public ResponseResult<Boolean> ifFollowEachOther(Long firstUser, Long secondUser) {
+        // 1.校验参数
+        if (firstUser == null || secondUser == null) {
+            throw new NullParamException();
+        }
+        // 2.判断是否互相关注
+        Boolean isFollow = stringRedisTemplate.opsForSet().isMember(InteractConstant.REDIS_FOLLOW_KEY + firstUser, secondUser.toString());
+        if (Boolean.TRUE.equals(isFollow)) {
+            return ResponseResult.successResult(Boolean.TRUE);
+        }
+        return ResponseResult.successResult(Boolean.FALSE);
     }
 }

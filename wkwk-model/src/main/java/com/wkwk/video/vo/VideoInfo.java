@@ -13,12 +13,12 @@ public class VideoInfo {
     /**
      * 视频id
      */
-    private String videoId;
+    private Long videoId;
 
     /**
      * 作者id
      */
-    private String authorId;
+    private Long authorId;
 
     /**
      * 封面url

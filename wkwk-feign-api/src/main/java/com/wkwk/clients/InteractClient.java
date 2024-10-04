@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 交互服务客户端接口
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@FeignClient(value = "azaz-service-interact", configuration = MyFeignRequestInterceptor.class)
+@FeignClient(value = "wkwk-service-interact", configuration = MyFeignRequestInterceptor.class)
 public interface InteractClient {
 
     /**

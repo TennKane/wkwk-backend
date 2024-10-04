@@ -38,10 +38,10 @@ public class UserFollowController {
      * @param secondUser 第二个用户
      * @return 是否关注
      */
-    @GetMapping("/ifFollow")
-    public ResponseResult<Boolean> ifFollow(@RequestParam("firstUser") Long firstUser,
-                                            @RequestParam("secondUser") Long secondUser) {
-        return userFollowService.ifFollow(firstUser, secondUser);
+    @GetMapping("/ifFollowEachOther")
+    public ResponseResult<Boolean> ifFollowEachOther(@RequestParam("firstUser") Long firstUser,
+                                                     @RequestParam("secondUser") Long secondUser) {
+        return userFollowService.ifFollowEachOther(firstUser, secondUser);
     }
 
     /**

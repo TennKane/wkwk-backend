@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 视频客户端
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@FeignClient(value = "azaz-service-video", configuration = MyFeignRequestInterceptor.class)
+@FeignClient(value = "wkwk-service-video", configuration = MyFeignRequestInterceptor.class)
 public interface VideoClient {
 
     /**

@@ -35,7 +35,7 @@ public class VideoDetail {
     /**
      * 视频点赞数
      */
-    private Integer likes;
+    private Long likes;
 
     /**
      * 是否点赞
@@ -45,12 +45,12 @@ public class VideoDetail {
     /**
      * 评论数
      */
-    private Integer comments;
+    private Long comments;
 
     /**
      * 视频收藏数
      */
-    private Integer collects;
+    private Long collects;
 
     /**
      * 是否收藏

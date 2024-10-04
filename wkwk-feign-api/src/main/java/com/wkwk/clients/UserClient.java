@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 用户服务客户端接口
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@FeignClient(value = "azaz-service-user", configuration = MyFeignRequestInterceptor.class)
+@FeignClient(value = "wkwk-service-user", configuration = MyFeignRequestInterceptor.class)
 public interface UserClient {
 
     /**

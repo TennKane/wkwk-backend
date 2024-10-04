@@ -1,5 +1,6 @@
 package com.wkwk.video.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -21,6 +22,7 @@ public class VideoDetailInfo {
     private boolean isCollected;
     private String userName;
     private String image;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private String createTime;
 
 }

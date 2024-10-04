@@ -259,6 +259,7 @@ public class VideoUploadServiceImpl implements VideoUploadService {
     public ResponseResult<VideoInfo> getVideoInfo(Long videoId) {
         Video video = getVideoById(videoId.intValue());
         VideoInfo videoInfo = new VideoInfo();
+        videoInfo.setVideoId(video.getId());
         BeanUtils.copyProperties(video,videoInfo);
         return ResponseResult.successResult(videoInfo);
     }
@@ -273,7 +274,7 @@ public class VideoUploadServiceImpl implements VideoUploadService {
         log.info("获取视频详细信息，视频id：{}",videoId);
         VideoDetail videoDetailInfo=new VideoDetail();
         Video video = getVideoById(videoId.intValue());
-        //如果没视频了，把之前的视频返回
+        //拷贝数据
         BeanUtils.copyProperties(video,videoDetailInfo);
         videoDetailInfo.setAuthorId(video.getAuthorId().toString());
         videoDetailInfo.setVideoId(video.getId().toString());

@@ -31,7 +31,7 @@ public class UserConstant {
     /**
      * 默认用户名前缀
      */
-    public static final String DEFAULT_USER_NAME_PRE = "azaz_";
+    public static final String DEFAULT_USER_NAME_PRE = "wkwk_";
 
     /**
      * 默认用户个性签名
