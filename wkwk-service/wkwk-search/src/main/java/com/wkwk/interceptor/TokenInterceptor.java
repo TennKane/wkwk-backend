@@ -25,7 +25,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         String userId = request.getHeader("userId");
         if(userId != null){
             //存入到当前线程中
-            ThreadLocalUtil.setUserId(Integer.valueOf(userId).longValue());
+            ThreadLocalUtil.setUserId(Long.valueOf(userId));
         }
         return true;
     }

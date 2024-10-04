@@ -1,6 +1,7 @@
 package com.wkwk.clients;
 
 
+import com.wkwk.interceptor.MyFeignRequestInterceptor;
 import com.wkwk.response.ResponseResult;
 import com.wkwk.video.vo.VideoDetail;
 import com.wkwk.video.vo.VideoInfo;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 视频客户端
  * @author <a href="https://github.com/TennKane">gtkkang</a>
  */
-@FeignClient("wkwk-service-video")
+@FeignClient(value = "azaz-service-video", configuration = MyFeignRequestInterceptor.class)
 public interface VideoClient {
 
     /**
@@ -36,7 +37,7 @@ public interface VideoClient {
      * @param videoId 视频id
      * @return 视频简略信息
      */
-    @GetMapping("/info")
+    @GetMapping("/wkwk/video//info")
     ResponseResult<VideoInfo> getVideoInfo(@RequestParam("videoId") Long videoId);
 
     /**
@@ -44,6 +45,6 @@ public interface VideoClient {
      * @param videoId 视频id
      * @return 视频详细信息
      */
-    @GetMapping("/detailInfo")
+    @GetMapping("/wkwk/video//detailInfo")
     ResponseResult<VideoDetail> getVideoDetailInfo(@RequestParam("videoId") Long videoId);
 }

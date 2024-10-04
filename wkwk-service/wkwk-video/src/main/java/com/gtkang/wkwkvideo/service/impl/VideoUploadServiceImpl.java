@@ -38,6 +38,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -177,7 +178,7 @@ public class VideoUploadServiceImpl implements VideoUploadService {
                 getVideoInfo.setTotal(videoList.size());
                 return ResponseResult.successResult(getVideoInfo);
             }
-            if(!video.getSection().equals(section) && !section.equals(0)){
+            if(!Objects.equals(section,video.getSection())&&!Objects.equals(section,0)){
                 continue;
             }
             BeanUtils.copyProperties(video,videoDetailInfo);
@@ -269,17 +270,22 @@ public class VideoUploadServiceImpl implements VideoUploadService {
      */
     @Override
     public ResponseResult<VideoDetail> getVideoDetailInfo(Long videoId) {
+        log.info("获取视频详细信息，视频id：{}",videoId);
         VideoDetail videoDetailInfo=new VideoDetail();
         Video video = getVideoById(videoId.intValue());
         //如果没视频了，把之前的视频返回
         BeanUtils.copyProperties(video,videoDetailInfo);
+        videoDetailInfo.setAuthorId(video.getAuthorId().toString());
+        videoDetailInfo.setVideoId(video.getId().toString());
         //判断是否喜欢与收藏
         videoDetailInfo.setIsLiked
                 (isDo(videoId,VideoConstant.SET_LIKE_KEY+video.getId().toString()));
         videoDetailInfo.setIsCollected
                 (isDo(videoId,VideoConstant.SET_LIKE_KEY+video.getId().toString()));
         //得到作者信息
+        log.info("获取作者信息，作者id：{}",video.getAuthorId());
         ResponseResult<UserPersonalInfoVo> res = userClient.getUserPersonalInfo(video.getAuthorId());
+        log.info("获取作者信息，结果：{}",res);
         UserPersonalInfoVo user = res.getData();
         videoDetailInfo.setUserName(user.getUsername());
         videoDetailInfo.setImage(user.getImage());

@@ -7,6 +7,7 @@ import com.wkwk.interact.vo.VideoListVo;
 import com.wkwk.response.ResponseResult;
 import com.wkwk.user.pojo.User;
 import com.wkwk.user.vo.UserPersonalInfoVo;
+import com.wkwk.utils.ThreadLocalUtil;
 import com.wkwk.video.pojo.Video;
 import com.wkwk.video.vo.VideoDetail;
 import lombok.extern.log4j.Log4j2;
@@ -105,6 +106,7 @@ public class SearchServiceImpl implements com.wkwk.service.SearchService{
     @Override
     public ResponseResult<VideoListVo> searchVideo(String keyword, Integer page, Integer pageSize) {
         log.info("搜索视频，关键字：{}，页码：{}，页大小：{}", keyword, page, pageSize);
+        log.info("当前用户:{}", ThreadLocalUtil.getUserId());
         // 根据keyword搜索tb_user表，返回用户列表
         // 设置查询条件
         SearchRequest searchRequest = new SearchRequest("tb_video");
