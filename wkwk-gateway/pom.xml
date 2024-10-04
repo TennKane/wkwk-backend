@@ -16,6 +16,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <!-- 服务注册发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -48,7 +52,14 @@
             <artifactId>wkwk-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
     </dependencies>
 
 </project>
