@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class UserFollowDto {
+
     /**
      * 操作目标用户id
      */

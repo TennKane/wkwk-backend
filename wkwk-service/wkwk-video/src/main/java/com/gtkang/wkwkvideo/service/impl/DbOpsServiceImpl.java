@@ -48,7 +48,7 @@ public class DbOpsServiceImpl implements DbOpsService {
      * @return 是否成功
      */
     @Override
-    public boolean addIntSafely(String key,int num) {
+    public void addIntSafely(String key,int num) {
         //获取分布式锁
         RLock lock = redissonClient.getLock(key+"xyz");
         try {
@@ -66,10 +66,6 @@ public class DbOpsServiceImpl implements DbOpsService {
                 //加上数字存入
                 int now=exNum+num;
                 this.stringRedisTemplate.opsForValue().set(key, Integer.toString(now));
-                return true;
-            }
-            else {
-                return false;
             }
         }
         catch (Exception e){
@@ -125,22 +121,21 @@ public class DbOpsServiceImpl implements DbOpsService {
     @PostConstruct
     @Scheduled(cron = "0 */ 720 * * * ?")
     public void fresh(){
-        Set likeKeys = stringRedisTemplate.keys(VideoConstant.STRING_LIKE_KEY+'*');
-        Set collectKeys = stringRedisTemplate.keys(VideoConstant.STRING_COLLECT_KEY+'*');
-        Set commentKeys = stringRedisTemplate.keys(VideoConstant.STRING_COMMENT_KEY+'*');
+        Set<String> likeKeys = stringRedisTemplate.keys(VideoConstant.STRING_LIKE_KEY+'*');
+        Set<String> collectKeys = stringRedisTemplate.keys(VideoConstant.STRING_COLLECT_KEY+'*');
+        Set<String> commentKeys = stringRedisTemplate.keys(VideoConstant.STRING_COMMENT_KEY+'*');
         if(likeKeys!=null) {
             //更新点赞数
-            for (Object likeKey : likeKeys) {
+            for (String likeKey : likeKeys) {
                 //得到videoId
-                String sub= likeKey.toString().substring(VideoConstant.STRING_LIKE_KEY.length());
+                String sub= likeKey.substring(VideoConstant.STRING_LIKE_KEY.length());
                 Long videoId=Long.parseLong(sub);
                 //创建新的video对象
                 Video video = new Video();
                 video.setId(videoId);
-                //获得点赞数
-                Long likes = Long.parseLong(stringRedisTemplate.opsForValue().get(likeKey));
-                //点赞数如果超过1000,以x.yk形式记录
-                video.setLikes(likes);
+                String likes = stringRedisTemplate.opsForValue().get(likeKey);
+                Long likesNum = Long.parseLong(likes == null ? "0" : likes);
+                video.setLikes(likesNum);
                 //刷新到数据库
                 videoMapper.updateById(video);
             }
@@ -170,8 +165,10 @@ public class DbOpsServiceImpl implements DbOpsService {
                 //创建新的video对象
                 Video video = new Video();
                 video.setId(videoId);
-                Long likes = Long.parseLong(stringRedisTemplate.opsForValue().get(commentKey));
-                video.setLikes(likes);
+                //获得评论数
+                String comments = stringRedisTemplate.opsForValue().get(commentKey);
+                Long commentNum = Long.parseLong(comments == null ? "0" : comments);
+                video.setComments(commentNum);
                 //刷新到数据库
                 videoMapper.updateById(video);
             }

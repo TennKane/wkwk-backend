@@ -2,9 +2,11 @@ package com.gtkang.wkwkvideo.service;
 
 import com.wkwk.response.ResponseResult;
 import com.wkwk.video.dto.VideoPublishDto;
+import com.wkwk.video.pojo.GetVideoInfo;
 import com.wkwk.video.pojo.Video;
 import com.wkwk.video.vo.VideoDetail;
 import com.wkwk.video.vo.VideoInfo;
+import com.wkwk.video.vo.VideoUploadVo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,21 +19,21 @@ public interface VideoUploadService {
      * @param videoPublishDto 视频信息
      * @return 是否成功
      */
-    ResponseResult publish(VideoPublishDto videoPublishDto);
+    ResponseResult<VideoUploadVo> publish(VideoPublishDto videoPublishDto);
 
     /**
      * 上传视频
      * @param file 视频文件
      * @return 是否成功
      */
-    ResponseResult upload(MultipartFile file);
+    ResponseResult<String> upload(MultipartFile file);
 
     /**
      * 获取视频列表
      * @param lastVideoId 最后一个视频的id
      * @return 视频列表
      */
-    ResponseResult getVideos(Integer lastVideoId,Integer section);
+    ResponseResult<GetVideoInfo> getVideos(Integer lastVideoId, Integer section);
 
     /**
      * 获取视频信息

@@ -1,6 +1,7 @@
 package com.gtkang.wkwkvideo.service;
 
 import com.wkwk.response.ResponseResult;
+import com.wkwk.video.pojo.Comment;
 import com.wkwk.video.pojo.Video;
 import com.wkwk.video.pojo.VideoList;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,7 @@ public interface VideoDoLikeService {
      * @param currentPage 当前页
      * @return 收藏数
      */
-    ResponseResult showCollectsList(Integer currentPage,Integer userId);
+    ResponseResult<List<Video>> showCollectsList(Integer currentPage, Integer userId);
 
     /**
      * 得到视频列表
@@ -72,5 +73,6 @@ public interface VideoDoLikeService {
      * @param videoId 视频id
      * @return 视频列表
      */
-    ResponseResult getCommentList(Long commentId,Long videoId);
+    ResponseResult<List<Comment>> getCommentList(Long commentId, Long videoId);
+
 }

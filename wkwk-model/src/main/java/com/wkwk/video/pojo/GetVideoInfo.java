@@ -10,9 +10,17 @@ import java.util.List;
  */
 @Data
 public class GetVideoInfo {
-    List<VideoDetailInfo> videoList;
-    Integer total;
-    Integer lastVideoId;
-
+    /**
+     * 视频列表
+     */
+    private List<VideoDetailInfo> videoList;
+    /**
+     * 视频总数
+     */
+    private Integer total;
+    /**
+     * 最后一个视频的id
+     */
+    private Integer lastVideoId;
 }
 

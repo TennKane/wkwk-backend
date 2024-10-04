@@ -2,6 +2,7 @@
 # Compiled class file
 *.class
 
+
 # Log file
 *.log
 
@@ -26,3 +27,5 @@ replay_pid*
 
 
 project-log/
+
+.idea

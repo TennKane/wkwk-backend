@@ -4,10 +4,13 @@ import com.gtkang.wkwkvideo.service.VideoDoLikeService;
 import com.gtkang.wkwkvideo.service.VideoUploadService;
 import com.wkwk.response.ResponseResult;
 import com.wkwk.video.dto.VideoPublishDto;
+import com.wkwk.video.pojo.Comment;
+import com.wkwk.video.pojo.GetVideoInfo;
 import com.wkwk.video.pojo.Video;
 import com.wkwk.video.pojo.VideoList;
 import com.wkwk.video.vo.VideoDetail;
 import com.wkwk.video.vo.VideoInfo;
+import com.wkwk.video.vo.VideoUploadVo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +35,7 @@ public class VideoController {
      * @return 是否成功
      */
     @PostMapping("/publish")
-    public ResponseResult publish(VideoPublishDto videoPublishDto){
+    public ResponseResult<VideoUploadVo> publish(VideoPublishDto videoPublishDto){
         return videoUploadService.publish(videoPublishDto);
     }
 
@@ -42,7 +45,7 @@ public class VideoController {
      * @return 是否成功
      */
     @PostMapping("/upload")
-    public ResponseResult upload(MultipartFile file){
+    public ResponseResult<String> upload(MultipartFile file){
         return videoUploadService.upload(file);
     }
 
@@ -88,7 +91,7 @@ public class VideoController {
      * @return 视频列表
      */
     @GetMapping("/getVideos")
-    public ResponseResult getVideo(Integer lastVideoId,Integer section){
+    public ResponseResult<GetVideoInfo> getVideo(Integer lastVideoId, Integer section) {
         return videoUploadService.getVideos(lastVideoId,section);
     }
 
@@ -132,7 +135,7 @@ public class VideoController {
      * @return 视频列表
      */
     @GetMapping("/showCollectList")
-    public ResponseResult collects(Integer currentPage,Integer userId){
+    public ResponseResult<List<Video>> showCollectList(Integer currentPage, Integer userId){
         return videoDoLikeService.showCollectsList(currentPage,userId);
     }
 
@@ -143,8 +146,7 @@ public class VideoController {
      * @return 视频列表
      */
     @GetMapping ("/getCommentList")
-    public ResponseResult doComment(Long commentId,Long videoId)
-    {
+    public ResponseResult<List<Comment>> getCommentList(Long commentId, Long videoId) {
         return videoDoLikeService.getCommentList(commentId,videoId);
     }
 
