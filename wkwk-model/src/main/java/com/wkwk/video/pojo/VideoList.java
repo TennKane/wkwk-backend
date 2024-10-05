@@ -10,7 +10,14 @@ import java.util.List;
  */
 @Data
 public class VideoList {
+    /**
+     * 视频列表
+     */
     public List<Video> videoList;
+
+    /**
+     * 总数
+     */
     public Integer total;
 
 }

@@ -33,7 +33,7 @@ public class QiniuOssUtil {
         String filePath="";
         Configuration cfg = new Configuration(Zone.autoZone());
         // 指定分片上传版本
-        cfg.resumableUploadAPIVersion = Configuration.ResumableUploadAPIVersion.V2;
+        //cfg.resumableUploadAPIVersion = Configuration.ResumableUploadAPIVersion.V2;
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传

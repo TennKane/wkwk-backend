@@ -9,6 +9,9 @@ spring:
     nacos:
       discovery:
         server-addr: 124.221.176.164:8848 # nacos地址
+      config:
+        file-extension: yaml # 配置文件为 azaz-service-user-dev.yaml
+
 feign:
   client:
     config:

@@ -64,4 +64,10 @@ public class VideoConstant {
      */
     public static final int LIKE_TYPE=1;
 
+
+    /**
+     *  最新一个视频的id
+     */
+    public static final String LAST_VIDEO_ID = "last_video_id:";
+
 }

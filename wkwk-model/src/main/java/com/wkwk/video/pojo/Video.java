@@ -18,13 +18,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @TableName("tb_video")
 public class Video  {
+    /**
+     * 视频id
+     */
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    /**
+     * 视频作者id
+     */
     @TableField("author_id")
     private Long authorId;
 
-
+    /**
+     * 视频名
+     */
     @TableField("title")
     private String title;
 
@@ -34,10 +42,15 @@ public class Video  {
     @TableField("section")
     private Integer section;
 
-
+    /**
+     * 视频封面url
+     */
     @TableField("cover_url")
     private String coverUrl;
 
+    /**
+     * 视频url
+     */
     @TableField("video_url")
     private String videoUrl;
 
@@ -55,12 +68,21 @@ public class Video  {
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
+    /**
+     * 点赞数
+     */
     @TableField("likes")
     private Long likes;
 
+    /**
+     * 收藏数
+     */
     @TableField("collects")
     private Long collects;
 
+    /**
+     * 评论数
+     */
     @TableField("comments")
     private Long comments;
 

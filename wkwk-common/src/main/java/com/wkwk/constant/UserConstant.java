@@ -47,4 +47,9 @@ public class UserConstant {
      * 用户登录token的redis过期时间
      */
     public static final long LOGIN_USER_TTL = 2 * 60 * 60L;
+
+    /**
+     * 用户注册锁的redis前缀
+     */
+    public static final String USER_REGISTER_LOCK = "user:register:lock";
 }

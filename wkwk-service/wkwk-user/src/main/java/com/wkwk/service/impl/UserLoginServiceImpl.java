@@ -17,6 +17,8 @@ import com.wkwk.user.dto.UserLoginDto;
 import com.wkwk.user.pojo.User;
 import com.wkwk.user.vo.UserLoginVo;
 import lombok.extern.log4j.Log4j2;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -40,6 +42,9 @@ public class UserLoginServiceImpl implements UserLoginService{
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    private RedissonClient redissonClient;
+
     /**
      * 用户注册
      * @param registerDto 注册信息
@@ -62,32 +67,45 @@ public class UserLoginServiceImpl implements UserLoginService{
         if (password.length() < UserConstant.PASSWORD_MIN_LENGTH || password.length() > UserConstant.PASSWORD_MAX_LENGTH) {
             throw new ErrorParamException("密码长度必须在5~20位之间！");
         }
-        // 2. 校验手机号是否已经注册, 即手机号对应的记录数是否大于0
-        if (userLoginMapper.ifExistPhone(phone) > 0) {
-            throw new ErrorParamException("手机号已经注册！");
+
+        // 对手机号加锁，防止并发注册
+        RLock registerLock = redissonClient.getLock(UserConstant.USER_REGISTER_LOCK + phone);
+        boolean tryLock = registerLock.tryLock();
+        if (!tryLock) {
+            // 出现并发注册，返回错误信息
+            throw new ErrorParamException("注册失败，请稍后再试！");
         }
-        // 3. 注册用户
-        // 3.1 随机生成 5 位长度的盐
-        String salt = RandomUtil.randomString(5);
-        // 3.2 对密码进行加密
-        String passwordWithMd5 = DigestUtils.md5DigestAsHex((password + salt).getBytes());
-        User user = User.builder()
-                .phone(phone)
-                .salt(salt)
-                .password(passwordWithMd5)
-                .username(UserConstant.DEFAULT_USER_NAME_PRE + RandomUtil.randomString(10))
-                .image(UserDefaultImageConstant.DEFAULT_USER_IMAGE_LIST[RandomUtil.randomInt(0, UserDefaultImageConstant.DEFAULT_USER_IMAGE_LIST.length)])
-                .signature(UserConstant.DEFAULT_USER_SIGNATURE)
-                .build();
-        // 3.3 将用户信息插入数据库
         try {
-            userMapper.insert(user);
-        } catch (Exception e) {
-            log.error("注册信息插入错误，注册信息：{}", registerDto);
-            throw new DbOperationException("注册信息插入错误！");
+            // 校验验证码是否正确
+            // 校验手机号是否已经注册, 即手机号对应的记录数是否大于0
+            if (userLoginMapper.ifExistPhone(phone) > 0) {
+                throw new ErrorParamException("手机号已经注册！");
+            }
+            // 注册用户
+            // 随机生成 5 位长度的盐
+            String salt = RandomUtil.randomString(5);
+            // 对密码进行加密
+            String passwordWithMd5 = DigestUtils.md5DigestAsHex((password + salt).getBytes());
+            User user = User.builder()
+                    .phone(phone)
+                    .salt(salt)
+                    .password(passwordWithMd5)
+                    .username(UserConstant.DEFAULT_USER_NAME_PRE + RandomUtil.randomString(10))
+                    .image(UserDefaultImageConstant.DEFAULT_USER_IMAGE_LIST[RandomUtil.randomInt(0, UserDefaultImageConstant.DEFAULT_USER_IMAGE_LIST.length)])
+                    .signature(UserConstant.DEFAULT_USER_SIGNATURE)
+                    .build();
+            // 将用户信息插入数据库
+            try {
+                userMapper.insert(user);
+            } catch (Exception e) {
+                log.error("注册信息插入错误，注册信息：{}", registerDto);
+                throw new DbOperationException("注册信息插入错误！");
+            }
+            // 返回注册成功
+            return ResponseResult.successResult();
+        } finally {
+            registerLock.unlock();
         }
-        // 4. 返回注册成功
-        return ResponseResult.successResult();
     }
 
     /**
